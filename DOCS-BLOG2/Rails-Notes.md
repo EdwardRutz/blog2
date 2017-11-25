@@ -1,7 +1,17 @@
 # Ruby on Rails 
-[Treehouse](https://teamtreehouse.com/tracks/rails-development)
+[Treehouse Exercise](https://teamtreehouse.com/tracks/rails-development)
 
 ##  RUBY ON RAILS 5 BASICS
+
+### Intentional Practice & Concepts
+- Create a new Rails app
+- Add resources using scaffold
+- Add resources indepenedently and editing views/controller as needed
+- Understand how the controller loads model objecs from the database and populates a view with them
+- Database: Use a migration to add additional parameters to the Model/fields to the database.
+  - Update the controller and necessary views to support the new attribute
+- Rails Console: Use the Rails Console to create, read, update and delete model objects
+- Security: Understanding of how Strong Parameters protect database from unauthorized changes.
 
 ### Creating an App
 
@@ -155,22 +165,22 @@ Post.all
   - Open app/views/posts/show.html.erb
   - Under the title code, add 
 
-      ```ruby
-        <p id="notice"><%= notice %></p>
+```ruby
+  <p id="notice"><%= notice %></p>
 
-        <p>
-          <strong>Title:</strong>
-          <%= @post.title %>
-        </p>
+  <p>
+    <strong>Title:</strong>
+    <%= @post.title %>
+  </p>
 
-        <p>
-          <strong>Body:</strong>
-          <%= @post.title %>
-        </p>
+  <p>
+    <strong>Body:</strong>
+    <%= @post.title %>
+  </p>
 
-        <%= link_to 'Edit', edit_post_path(@post) %> |
-        <%= link_to 'Back', posts_path %>
-    ```
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+  <%= link_to 'Back', posts_path %>
+```
 
 #### Updating Partials
 - "Partial" is short for "partial view". A partial contains the HTML code for the form.
@@ -187,38 +197,89 @@ Post.all
     ```<%= render 'form', post: @post```
 - In ```<%= form_with(model: post, local: true) do |form| %> ``` the ```|form|``` holds the Ruby object representing the html form.
 
-
-
 #### Updating Strong Parameters
+- Strong Parameters prevent unauthorized changes
+- Strong parameters is a list of parameters in every controller which the controller will accept.
+- This prevents users from adding parameters that give them too many permission on the site.
+- Rails Strong Parameters prevents the body parameter from writing to the database. We need to add the body field to the list of approved parameters.
+- The create method in post_controller.rb calls the post_params method. We need to add the body parameter to this method.
 
+```ruby
+def create
+    @post = Post.new(post_params)
+    ...
+end
+```
 
+- Add the body parameter to post_param method in the post_controller.rb
+
+```ruby
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def post_params
+      params.require(:post).permit(:title :body)
+    end
+```
 
 
 
 ================================
+
+
+
 ## RAILS ROUTES AND RESOURCES
-CONCEPTS: Routes, Models, Views, Controllers
+
+### Intentional Practice & Concepts
+- Create resources from scratch: Models, Views, Controllers
+- Modify routes as needed
 
 
 ###  A Route to an Index Action 
-Set up a route, a controller, a view, and a model for our Pages from scratch without using scaffold
-- 
+- Rails lets you set up "routes" for requests, so that you can send a particular request to a controller that can handle it.
+- Set up a route, a controller, a view, and a model for our Pages from scratch without using scaffold
+- Use ```bin/rails routes``` to view all routes used by the application
+
+#### Creating a Route
+- Set up a route to the pages controller, then create a pages controller.
+- To set up a route to the index of all Page objects, add this in config/routes.rb:
+
+```get '/pages', to: 'pages#index'```
+
+- GET, a request to view a page uses ```GET```
+- As an arguement to the get method, provide a path this route shoud match as a string: ```/pages```
+- The next GET arguement is a hash giving keys and values: ```to: 'pages#index'```
+  - The to: key specifies which controller and action the request is sent to  
+- Instance methods of a class are marked with a hashmark(#)
+- Results: The request for pages is routed correctly but no Pages controller exists.
+
+#### Creating a Controller
+- Use the controller generator to create a pages controller to handle request for pages
+- Controller names are plural
+- Don't put "controller" in the name because rails automatically adds it.
+- To delete, type ```rails destroy ControllerName```
+- Generate Controller:  ```bin/rails generate controller Pages```
+- Results:  Pages controller is found but there is no index action
+
+##### Add an Index Action
+- In pages_controller.rb add a method
+
+```
+def index
+end
+```
+
+#### Creating a View
+- Create an index View for the pages controller
+- In app/views/pages create the file index.html.erb
+- Add basic html to the page
 
 
-
-
+#### Creating a Model
+#### Add Records Via Rails Console
+#### Populating the View
 
 ###  A Route to a Read Action 
-
-
-
 ###  Routes to Create Actions 
-
-
-
 ###  Routes to Update Actions 
-
-
 ###  A Route to a Delete Action 
 
 
