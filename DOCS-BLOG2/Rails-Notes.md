@@ -341,6 +341,7 @@ Page.all
 - We created "Page" records for it to load. 
 - We still don't see any page data. That's because we haven't set up the our view template to display the pages we've loaded. To do that, we're going to use ERB to embed some Ruby code into our HTML.
 
+##### Notes...
 - Most text in an ERB template is copied to the output verbatim.
 
   ```<p>I'll appear in the output exactly as I do here.</p>```
@@ -378,6 +379,10 @@ Page.all
     <p><%= index %> fish</p>
   <% end %>
 ```
+##### Add Page Content to the Site
+Add page content to index.html.erb:
+
+- Using ```<%= @pages.first.title %>``` only shows first title.  A loop is needed:
 
 - Assuming @pages contains a collection of Page objects, this code will output the title of each Page:
 
@@ -388,7 +393,31 @@ Page.all
     </p>
   <% end %>
 ```
+##### Summary of the Process
+- Here is how the request gets processed from beginning to end
+- A route receives the http GET request and directs it to the proper controller and action.
+- The route directs the "/pages" path to the pages_controller's "pages#index" action
 
+    ```get 'pages/', to: 'pages#index'```
+
+- The "index" method loads the collection of page model objects from the database and assigns the collection to an instance variable, @pages...
+
+```ruby
+  def index
+    @pages = Page.all
+  end
+```
+
+- By default, the pages_controller looks for the app/views/index.html.erb 
+- Within the index template, we loop over each of the page objects and output an html paragraph with the page.title
+
+```ruby
+  <h1>Blog Pages</h1>
+
+  <% @pages.each do |page| %>
+    <p><%= page.title %></p>
+  <% end %>
+```
 
 
 
