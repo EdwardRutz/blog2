@@ -300,9 +300,97 @@ end
 - The slug attribute is used to make human readable urls
 - Results: migration is created but database isn't updated until we run ```rails db:migrate```
 
-
 #### Add Records Via Rails Console
+- We created a Page model class, but the list of pages is still blank. Part of the problem is that no "Page" records exist now. Go to the Rails console and fix that...
+- Start rails console:  ```bin/rails c```
+  - both ```rails console``` or ```rails c``` work.
+
+- ```Page.all``` is empty because there are no records.
+- Create records to go in model
+- Create a new variable to hold the Page object and create a new empty page object to go in it.
+
+```page = Page.new```
+
+- Next, assign attributes...
+```ruby
+page.title = "About this Blog"
+page.body = "Here I will share my notes about Rails."
+page.slug = "about"
+page.save
+```
+- Create two more page objects...
+
+```ruby
+page2 = Page.new
+page2.title = "My Resume"
+page2.body = "Edward Rutz\n \n Ruby Developer \n \n Likes hiking up mountains."
+page2.slug = "resume"
+page2.save
+
+page3 = Page.new
+page3.title = "My Robots"
+page3.body =  "Zorgbot\nMoon Explorer\An old robot"
+page3.slug = "robots"
+page3.save
+
+Page.all
+```
+
 #### Populating the View
+- We set up our controller's "index" method to load all "Page" objects into the "@pages" instance variable. 
+- We created "Page" records for it to load. 
+- We still don't see any page data. That's because we haven't set up the our view template to display the pages we've loaded. To do that, we're going to use ERB to embed some Ruby code into our HTML.
+
+- Most text in an ERB template is copied to the output verbatim.
+
+  ```<p>I'll appear in the output exactly as I do here.</p>```
+
+- But Ruby code within ERB tags gets evaluated instead of being copied directly to the output.
+- Code within output ERB tags (<%= %>) is evaluated, and the result is embedded into the output. This code will output the current time:
+
+    ```<p>The current time is: <%= Time.now %></p>```
+
+- Code within regular ERB tags (<% %>, without an equals sign) is also evaluated, but is not included directly in the output. It can be used to influence the result of output tags.
+
+- If you place a conditional within regular tags, text within the conditional will only be output if the condition is true. This code will include You passed! in the output:
+
+```ruby
+    <% grade = 97 %>
+    <% if grade > 60 %>
+      You passed!
+    <% end %>
+```
+
+- This code will not:
+
+```ruby
+    <% grade = 54 %>
+    <% if grade > 60 %>
+      You passed!
+    <% end %>
+```
+
+- If you place a loop in regular ERB tags, text within the loop will be output repeatedly.
+- This code will output 4 <p> elements with the text 0 fish, 1 fish, 2 fish, and 3 fish:
+
+```ruby
+  <% 4.times do |index| %>
+    <p><%= index %> fish</p>
+  <% end %>
+```
+
+- Assuming @pages contains a collection of Page objects, this code will output the title of each Page:
+
+```ruby
+  <% @pages.each do |page| %>
+    <p>
+      <%= page.title %>
+    </p>
+  <% end %>
+```
+
+
+
 
 ###  A Route to a Read Action 
 ###  Routes to Create Actions 
