@@ -271,9 +271,36 @@ end
 - Create an index View for the pages controller
 - In app/views/pages create the file index.html.erb
 - Add basic html to the page
-
+- Git Log shows all commits ```git log```
 
 #### Creating a Model
+- The /pages path needs to show a list of blog pages. Set the controller up to load Page data to be include in the template.
+
+- Run the model generator from the terminal:  ```bin/rails generate model ModelName attr1:type attr2:type```
+- ...where ModelName is the name of the model class to create (like Post), attr1, attr2, etc. are the names of attributes (like title or body), and each type entry is the type of the attribute (like string or integer).
+- Create a list of the blog pages on the pages view.
+- In the pages_controller load page data to include in a template
+- Create a method to load all page data and store it in an instance variable 
+- In pages_controller.rb, add:
+
+```ruby
+def index
+  @pages = "Page.all"
+end
+```
+- Results: Receive an error because the model class is not created yet.
+
+##### Create a Model Class
+- Use the rails model generator to create a model class, source files and migration file to create records to hold the data.
+
+```ruby
+  bin/rails generate model Page title:string body:text slug:text
+```
+
+- The slug attribute is used to make human readable urls
+- Results: migration is created but database isn't updated until we run ```rails db:migrate```
+
+
 #### Add Records Via Rails Console
 #### Populating the View
 
