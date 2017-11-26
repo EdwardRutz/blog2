@@ -5,14 +5,18 @@ Exercise, creating a variation of the basic blog Rails app.
 See notes in [DOCS-BLOG2/Rails-Notes.md](https://github.com/EdwardRutz/blog2/blob/master/DOCS-BLOG2/Rails-Notes.md)
 
 ## Intentional Practice & Concepts
-- Create a new Rails app
+- Create a new Rails apps
+- Master the MVC process from http request to views.
 - Add resources using scaffold
 - Add resources indepenedently and editing views/controller as needed
 - Understand how the controller loads model objecs from the database and populates a view with them
 - Database: Use a migration to add additional parameters to the Model/fields to the database.
   - Update the controller and necessary views to support the new attribute
-- Rails Console: Use the Rails Console to create, read, update and delete model objects
+- Rails Console: Use the Rails Console to create, read, update and delete model objects and add data to database.
+- Master routes
+- Create dynamic templates using Extended Ruby
 - Security: Understanding of how Strong Parameters protect database from unauthorized changes.
+
 
 =====================================================
 

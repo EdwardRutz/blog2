@@ -1,7 +1,11 @@
 # Ruby on Rails 
 [Treehouse Exercise](https://teamtreehouse.com/tracks/rails-development)
 
+
+=======================================
 ##  RUBY ON RAILS 5 BASICS
+=======================================
+
 
 ### Intentional Practice & Concepts
 - Create a new Rails app
@@ -12,6 +16,7 @@
   - Update the controller and necessary views to support the new attribute
 - Rails Console: Use the Rails Console to create, read, update and delete model objects
 - Security: Understanding of how Strong Parameters protect database from unauthorized changes.
+
 
 ### Creating an App
 
@@ -222,15 +227,18 @@ end
 
 
 
-================================
-
-
-
+=======================================
 ## RAILS ROUTES AND RESOURCES
+=======================================
+
+
 
 ### Intentional Practice & Concepts
 - Create resources from scratch: Models, Views, Controllers
-- Modify routes as needed
+- Modify routes, controllers and views
+- Create dynamic templates using .each and if statements.
+- Add data to database via the Rails console
+- Understand the MVC process from http request to View.
 
 
 ###  A Route to an Index Action 
@@ -419,9 +427,12 @@ Add page content to index.html.erb:
   <% end %>
 ```
 
-
-
 ###  A Route to a Read Action 
+
+
+
+
+
 ###  Routes to Create Actions 
 ###  Routes to Update Actions 
 ###  A Route to a Delete Action 
